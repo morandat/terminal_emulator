@@ -257,7 +257,7 @@ class ScreenHandler {
         int len;
         if (code < 0) {
             int idx = - code - 1;
-            if (idx > (sizeof(error_msgs)/(sizeof(error_msgs[0]))))
+            if (idx > (ssize_t)(sizeof(error_msgs)/(sizeof(error_msgs[0]))))
                 idx = 0;
             len = snprintf(buffer, BUFFER_SIZE, KO_STRING ":%s" CRLF, error_msgs[idx]);
             //  } else if (code == 0){

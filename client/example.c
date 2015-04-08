@@ -6,17 +6,17 @@
 
 const char *star_wars[] = {
   "La République Galactique est en pleine ébullition.",
-  "La taxation des routes commerciales reliant les systèmes", 
-  "éloignés provoque la discorde.", 
-  "", 
-  "Pour régler la question, la cupide Fédération du Commerce", 
-  "et ses redoutables vaisseaux de guerre imposent un blocus", 
-  "à la petite planète Naboo.", 
+  "La taxation des routes commerciales reliant les systèmes",
+  "éloignés provoque la discorde.",
   "",
-  "Face à ce dangereux engrenage, alors que le Congrès de la", 
-  "République s’enlise dans des débats sans fin, le Chancelier", 
-  "Suprême charge en secret deux Chevaliers Jedi, gardiens de", 
-  "la paix et de la justice dans la galaxie, de résoudre le", 
+  "Pour régler la question, la cupide Fédération du Commerce",
+  "et ses redoutables vaisseaux de guerre imposent un blocus",
+  "à la petite planète Naboo.",
+  "",
+  "Face à ce dangereux engrenage, alors que le Congrès de la",
+  "République s’enlise dans des débats sans fin, le Chancelier",
+  "Suprême charge en secret deux Chevaliers Jedi, gardiens de",
+  "la paix et de la justice dans la galaxie, de résoudre le",
   "conflit...",
   NULL };
 
@@ -61,11 +61,17 @@ void clear_screen(struct board_t *board) {
     bd_send_line(board, i, "");
 }
 
+void scroll_screen(struct board_t *board, const char *text[]) {
+    clear_screen(board);
+    for (int i = 0; i < SCREEN_LINES; i ++)
+      bd_send_line(board, SCREEN_LINES - i - 1, text[1]);
+}
+
 void print_screen(struct board_t *board, const char *text[]) {
   int i = 0;
   for (i = 0; smiley[i] && i < SCREEN_LINES; i ++)
     bd_send_line(board, i, smiley[i]);
-  while ( i < SCREEN_LINES)
+  while (i < SCREEN_LINES)
     bd_send_line(board, i, "");
 }
 
@@ -99,7 +105,7 @@ int main(int argc, char *argv[]) {
     bd_send_line(&board, 13, line); // et on affiche les '*'
     usleep(100);
   }
-  printf("Le pin est %d\n", pin); 
+  printf("Le pin est %d\n", pin);
   bd_disconnect(&board); // On se déconnecte du simulateur
 
   return EXIT_SUCCESS;
