@@ -343,6 +343,7 @@ int main( int argc, char** argv ) {
         }
     }
 
+    server.close();
     screen.releaseDisplay();
     return 0;
 }

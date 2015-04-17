@@ -37,7 +37,7 @@ public:
     void connect(std::string addr);
 };
 
-class ServerSocket: Socket {
+class ServerSocket: public Socket {
 public:
     ServerSocket(int port, int queue_size = LISTENQ);
     Socket& accept();
