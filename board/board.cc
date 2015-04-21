@@ -115,7 +115,9 @@ class Screen {
     }
 
     int getButton() {
-        return p_buttons;
+        int b = p_buttons;
+        p_buttons = 0;
+        return b;
     }
 
     void pressKey(int key) {
