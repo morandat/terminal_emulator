@@ -44,6 +44,13 @@ void Socket::bind(int port, long s_addr, short in_family) {
 }
 
 void Socket::bind(struct sockaddr* addr, size_t sizeOfSockAddr) {
+  int optval = 1;
+#ifdef SO_REUSEADDR
+  setsockopt(fd, SOL_SOCKET, SO_REUSEADDR, &optval, sizeof optval);
+#endif
+#ifdef SO_REUSEPORT
+  setsockopt(fd, SOL_SOCKET, SO_REUSEPORT, &optval, sizeof optval);
+#endif
   if (::bind(fd, addr, sizeOfSockAddr) < 0)
     throw "Cannot bind() socket";
 }
