@@ -67,8 +67,12 @@ class Screen {
                 c &= 0xff;
                 if (c >= 4 && c <= 0xb) // F1 ... F4 .. F8
                     pushButton(c - 4);
+                else if(c >= 0xbe && c <= 0xc5) // F1 ... F4 .. F8
+                    pushButton(c - 0xbe);
                 else if(c >= 0xc && c <= 0xf) // F9 .. F12
                     pushButton(c - 8);
+                else if(c >= 0xc6 && c <= 0xca) // F9 .. F12
+                    pushButton(c - 0xc6 + 4);
             } else if (c & 0xff)
                 pressKey(c & 0xff);
         }
